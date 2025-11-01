@@ -266,26 +266,40 @@ Scalability improvements: Optimizing the simulation for larger networks
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
-This framework was developed as a research project for 5G network optimization. Special thanks to all contributors who helped design, implement, and test this system.
+This project draws significant inspiration from the SliceSim: A Simulation Suite for Network Slicing in 5G Networks project by Abdurrahman Dilmaç and Muhammed Emin Güre.
 
-This project was developed as an advanced optimization framework inspired by the foundational simulation environment provided by Rohan Chandrashekar's 5G Network Slicing Simulation project.
-
-A special thanks to that work, which provided a robust and modular starting point for implementing and testing the new optimization algorithms and adaptive strategies found in this framework.
+Their work provides an excellent and highly flexible discrete-event simulation suite for modeling 5G network scenarios. This framework was built by extending those foundational simulation concepts to create a closed-loop system focused specifically on automated optimization.
 
 Key Differences and Optimizations
-While the base simulation project provides an excellent environment for simulating network slices, this Optimization Framework introduces several new, automated features focused on finding and applying the most efficient resource allocation strategies.
+While SliceSim provides a powerful and flexible simulation suite for running user-defined scenarios, this project is an Optimization Framework that introduces several new, automated algorithms on top of that foundation.
+
+The primary goal here is not just to simulate a configuration, but to find the best one automatically.
 
 Here are the primary additions:
 
-Automated Parameter Sweep: This framework includes a complete workflow (optimize_slices.py) that automatically runs dozens of simulations, testing different combinations of resource_reservation and bandwidth_guaranteed to find the optimal configuration.
+Automated Parameter Sweep:
 
-Intelligent Base Station Selection: The client connection logic was upgraded from a simple "closest base station" model to a load-aware algorithm. It now calculates a weighted score based on both distance and the current resource load of the target slice on a base station, preventing congestion.
+This framework includes a complete workflow (run_5g_optimization.py, optimize_slices.py) to systematically test dozens of parameter combinations (like resource_reservation and bandwidth_guaranteed).
 
-Adaptive Resource Reservation: A new _adapt_reserved_capacity algorithm was implemented. This allows slices (especially URLLC) to dynamically increase or decrease their reserved capacity in real-time based on recent latency trends, ensuring QoS is met without over-provisioning resources.
+It automatically runs these simulations to find the configuration that yields the best performance, a feature noted as "Future Work" in the SliceSim project.
 
-Focus on Measurable Results: The project is built around an analyze_optimization_results.py script that directly compares the "Base Configuration" against the "Optimized Configuration" to produce a clear results table, proving the effectiveness of the optimization.
+Adaptive Resource Reservation:
 
-Comprehensive Visualization: The framework generates a complete dashboard that not only shows real-time metrics but also includes charts specifically designed to visualize the impact of parameters on performance, allowing for deeper analysis.
+This framework implements a novel _adapt_reserved_capacity algorithm.
+
+This allows slices (especially URLLC) to dynamically adjust their reserved capacity in real-time based on recent latency trends, ensuring QoS is met without over-provisioning. This is a form of the "Dynamic slicing mechanism" also listed as a future goal for SliceSim.
+
+Intelligent Base Station Selection:
+
+The client connection logic was upgraded from a distance-based check to a load-aware algorithm.
+
+The assign_closest_base_station function calculates a weighted score based on both distance and the current resource load (slice_load) of the target slice on that base station, actively preventing congestion.
+
+Comparative Results Workflow:
+
+The entire framework is built to produce a clear, measurable outcome.
+
+The analyze_optimization_results.py script directly compares a "Base Configuration" against the final "Optimized Configuration" to generate the Optimization Results table, proving the effectiveness of the new algorithms.
 
 ## Contact
 For any inquiries regarding this project, please reach out to the project maintainers.
