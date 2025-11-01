@@ -260,11 +260,32 @@ Scalability improvements: Optimizing the simulation for larger networks
 - Piyush Jain  
 - Harsh Bachal  
 
+
+
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 This framework was developed as a research project for 5G network optimization. Special thanks to all contributors who helped design, implement, and test this system.
+
+This project was developed as an advanced optimization framework inspired by the foundational simulation environment provided by Rohan Chandrashekar's 5G Network Slicing Simulation project.
+
+A special thanks to that work, which provided a robust and modular starting point for implementing and testing the new optimization algorithms and adaptive strategies found in this framework.
+
+Key Differences and Optimizations
+While the base simulation project provides an excellent environment for simulating network slices, this Optimization Framework introduces several new, automated features focused on finding and applying the most efficient resource allocation strategies.
+
+Here are the primary additions:
+
+Automated Parameter Sweep: This framework includes a complete workflow (optimize_slices.py) that automatically runs dozens of simulations, testing different combinations of resource_reservation and bandwidth_guaranteed to find the optimal configuration.
+
+Intelligent Base Station Selection: The client connection logic was upgraded from a simple "closest base station" model to a load-aware algorithm. It now calculates a weighted score based on both distance and the current resource load of the target slice on a base station, preventing congestion.
+
+Adaptive Resource Reservation: A new _adapt_reserved_capacity algorithm was implemented. This allows slices (especially URLLC) to dynamically increase or decrease their reserved capacity in real-time based on recent latency trends, ensuring QoS is met without over-provisioning resources.
+
+Focus on Measurable Results: The project is built around an analyze_optimization_results.py script that directly compares the "Base Configuration" against the "Optimized Configuration" to produce a clear results table, proving the effectiveness of the optimization.
+
+Comprehensive Visualization: The framework generates a complete dashboard that not only shows real-time metrics but also includes charts specifically designed to visualize the impact of parameters on performance, allowing for deeper analysis.
 
 ## Contact
 For any inquiries regarding this project, please reach out to the project maintainers.
