@@ -1,4 +1,4 @@
-# 5G Network Slicing Optimization Framework
+# Slicemaster - 5G Network Slicing Optimization Framework
 
 ## Overview
 
